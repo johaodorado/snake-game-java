@@ -7,7 +7,6 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 
-import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
 
 
@@ -15,7 +14,7 @@ public class SnakeHead extends GameEntity implements Interactable {
     private static final float turnRate = 2;
     private Snake snake;
 
-    public SnakeHead(Snake snake, Vec2d position) {
+    public SnakeHead(Snake snake, Point2D position) {
         this.snake = snake;
         setImage(Globals.getInstance().getImage("SnakeHead"));
         setPosition(position);

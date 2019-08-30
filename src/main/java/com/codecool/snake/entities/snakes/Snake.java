@@ -6,7 +6,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
 
-import com.sun.javafx.geom.Vec2d;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 
@@ -18,7 +18,7 @@ public class Snake implements Animatable {
     private DelayedModificationList<GameEntity> body;
 
 
-    public Snake(Vec2d position) {
+    public Snake(Point2D position) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
 
@@ -44,7 +44,7 @@ public class Snake implements Animatable {
 
     public void addPart(int numParts) {
         GameEntity parent = getLastPart();
-        Vec2d position = parent.getPosition();
+        Point2D position = parent.getPosition();
 
         for (int i = 0; i < numParts; i++) {
             SnakeBody newBodyPart = new SnakeBody(position);

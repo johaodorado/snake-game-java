@@ -8,49 +8,60 @@ import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 
-
-public class SnakeHead extends GameEntity implements Interactable {
-    private static final float turnRate = 2;
+public class SnakeHead extends GameEntity implements SnakePart, Interactable {
     private Snake snake;
-
+ private static final float turnRate = 2;
     public SnakeHead(Snake snake, Point2D position) {
         this.snake = snake;
         setImage(Globals.getInstance().getImage("SnakeHead"));
         setPosition(position);
     }
-
     public void updateRotation(SnakeControl turnDirection, float speed) {
         double headRotation = getRotate();
 
         if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
-            headRotation = headRotation - turnRate;
+            headRotation -= turnRate;
         }
         if (turnDirection.equals(SnakeControl.TURN_RIGHT)) {
-            headRotation = headRotation + turnRate;
+            headRotation += turnRate;
         }
 
-        // set rotation and position
         setRotate(headRotation);
         Point2D heading = Utils.directionToVector(headRotation, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
-
     @Override
     public void apply(GameEntity entity) {
-        if(entity instanceof Enemy){
-            System.out.println(getMessage());
+        if (entity instanceof Enemy) {
             snake.changeHealth(((Enemy) entity).getDamage());
         }
-        if(entity instanceof SimplePowerUp){
-            System.out.println(getMessage());
+        if (entity instanceof SimplePowerUp) {
             snake.addPart(4);
         }
     }
+    @Override
+    public void updatePosition(Point2D newPosition) {
+        setPosition(newPosition);
+    }
 
     @Override
-    public String getMessage() {
-        return "IMMA SNAEK HED! SPITTIN' MAH WENOM! SPITJU-SPITJU!";
+    public Point2D getPosition() {
+        return new Point2D(getX(), getY());
     }
-}
+    public void render(GraphicsContext gc) {       
+    }
+    @Override
+    public void step() {
+    }
+    @Override
+    public void render() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    @Override
+    public String getMessage() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+}}
+

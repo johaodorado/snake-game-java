@@ -6,10 +6,7 @@ package com.codecool.snake.entities.snakes;
 
 import javafx.geometry.Point2D;
 
-
 public interface SnakePart {
     void updatePosition(Point2D newPosition);
     Point2D getPosition();
-    void render();
-    void step();
 }
